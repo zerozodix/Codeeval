@@ -1,0 +1,131 @@
+<script>
+  function mainSolvePloblem(stringInput) {
+    var inputObj = validateInputStringToObj(stringInput);
+    var maxString = findMaxStringInArrayObj(inputObj);
+    var result = printStringResult(maxString);
+    return result;
+  }
+
+  function validateInputStringToObj(inputString) {
+    var result = inputString.split(" ");
+    return result;
+  }
+
+  function findMaxStringInArrayObj(arrayObj) {
+    var maxLanghtString = arrayObj[0];
+    for (var i = 0; i < arrayObj.length; i++) {
+      maxLanghtString = selectMaxString(maxLanghtString, arrayObj[i]);
+    }
+    return maxLanghtString;
+  }
+
+  function printStringResult(stringValue) {
+    var result = "";
+    for (var i = 0; i < stringValue.length; i++) {
+      result += addStar(i) + stringValue[i] + " ";
+    }
+    return result.trim();
+  }
+
+  function addStar(starNumber) {
+    var star = "";
+    while (starNumber > 0) {
+      star = star + "*";
+      starNumber--;
+    }
+    return star;
+  }
+
+  function selectMaxString(stringBase, stringCompare) {
+    if(stringBase.length < stringCompare.length) {
+      return stringCompare;
+    } else {
+      return stringBase;
+    }
+  }
+
+  ////////////// TEST ZONE ////////////////
+
+  function mainTest(){
+    Test_validateInputStringToObj_WhenInputIsCatDogHello_MustReturnTreeArray();
+    Test_validateInputStringToObj_WhenInputIsStopFootballPlay_MustReturnTreeArray();
+    Test_findMaxStringInArrayObj_WhenInputIsArrayCatDagHello_MustReturnHello();
+    Test_findMaxStringInArrayObj_WhenInputIsArrayStopFootballPlay_MustReturnFootball();
+    Test_printStringResult_WhenInputIsStringHello_MustReturnH_0E_00L_000L_0000O();
+    Test_printStringResult_WhenInputIsStringFootball_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l();
+    Test_mainSolvePloblem_WhenInputIsStringStopFootballPlay_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l();
+  }
+
+  function Test_validateInputStringToObj_WhenInputIsCatDogHello_MustReturnTreeArray() {
+    var funcName = "Test_validateInputStringToObj_WhenInputIsCatDogHello_MustReturnTreeArray";
+    var result = validateInputStringToObj("cat dog hello");
+    var expectResult = 3;
+    Assert(funcName, expectResult, result.length);
+  }
+
+  function Test_validateInputStringToObj_WhenInputIsStopFootballPlay_MustReturnTreeArray() {
+    var funcName = "Test_validateInputStringToObj_WhenInputIsStopFootballPlay_MustReturnTreeArray";
+    var result = validateInputStringToObj("stop football play");
+    var expectResult = 3;
+    Assert(funcName, expectResult, result.length);
+  }
+
+  function Test_findMaxStringInArrayObj_WhenInputIsArrayCatDagHello_MustReturnHello(argument) {
+    var funcName = "Test_findMaxStringInArrayObj_WhenInputIsArrayCatDagHello_MustReturnHello";
+    var result = findMaxStringInArrayObj(["cat", "dog", "hello"]);
+    var expectResult = "hello";
+    Assert(funcName, expectResult, result);
+  }
+
+  function Test_findMaxStringInArrayObj_WhenInputIsArrayStopFootballPlay_MustReturnFootball(argument) {
+    var funcName = "Test_findMaxStringInArrayObj_WhenInputIsArrayStopFootballPlay_MustReturnFootball";
+    var result = findMaxStringInArrayObj(["stop", "football", "play"]);
+    var expectResult = "football";
+    Assert(funcName, expectResult, result);
+  }
+
+  // Limit of function name, I must assume 0 is * and _ is space
+  function Test_printStringResult_WhenInputIsStringHello_MustReturnH_0E_00L_000L_0000O(argument) {
+    var funcName =  "Test_printStringResult_WhenInputIsStringHello_MustReturnH_0E_00L_000L_0000O";
+    var result = printStringResult("hello");
+    var expectResult = "h *e **l ***l ****o";
+    Assert(funcName, expectResult, result);
+  }
+
+  // Limit of function name, I must assume 0 is * and _ is space
+  function Test_printStringResult_WhenInputIsStringFootball_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l(argument) {
+    var funcName =  "Test_printStringResult_WhenInputIsStringFootball_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l";
+    var result = printStringResult("football");
+    var expectResult = "f *o **o ***t ****b *****a ******l *******l";
+    Assert(funcName, expectResult, result);
+  }
+
+  // Limit of function name, I must assume 0 is * and _ is space
+  function Test_mainSolvePloblem_WhenInputIsStringStopFootballPlay_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l(argument) {
+    var funcName =  "Test_mainSolvePloblem_WhenInputIsStringStopFootballPlay_MustReturnF_0o_00o_000t_0000b_00000a_000000l_0000000l";
+    var result = mainSolvePloblem("stop football play");
+    var expectResult = "f *o **o ***t ****b *****a ******l *******l";
+    Assert(funcName, expectResult, result);
+  }
+
+
+  //////////////////////////////////////////
+
+
+  ////////////// GLOBAL TEST ZONE ////////////////
+
+
+  function Assert(funcName ,expectResult, result) {
+    if (result != expectResult) {
+      var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+      alert("Error -- > " + errorMsg);
+      console.log("Error -> " + errorMsg);
+    }
+    else {
+      console.log("Success -> " + funcName);
+    }
+  }
+
+
+
+</script>

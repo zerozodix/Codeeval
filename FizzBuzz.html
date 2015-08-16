@@ -1,0 +1,37 @@
+<script>
+  //Sample code to read in test cases:
+  var fs  = require("fs");
+  fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
+      if (line != "") {
+          var input = line.split(" ");
+          calculateFizzBuzz(input[0], input[1], input[2]);
+      }
+  });
+
+  function calculateFizzBuzz(fizz, buzz, Length){
+      var result = "";
+      for (var i = 1; i <= Length; i++) {
+          result = result + getFizzBuzzValue(fizz, buzz, i) + " ";
+      }
+      console.log(result);
+  }
+
+
+  function getFizzBuzzValue(fizz , buzz, Number) {
+      if ( checkFizzOrBuzz(Number, fizz) ) {
+          if ( checkFizzOrBuzz(Number, buzz) ) {
+              return "FB";
+          }
+          return "F";
+      }
+      if ( checkFizzOrBuzz(Number, buzz) ) {
+          return "B"
+      }
+      return Number;
+  }
+
+  function checkFizzOrBuzz(Number, fizzBuzzNumb){
+      return Number % fizzBuzzNumb == 0;
+  }
+
+</script>

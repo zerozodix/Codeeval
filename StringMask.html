@@ -1,0 +1,103 @@
+<script>
+  function mainSolvePloblem(stringInput) {
+    var inputObj = validateInputStringToObj(stringInput);
+    if (!isObjMatch(inputObj)) return;
+    var result = maskingString(inputObj[0], inputObj[1])
+    return result;
+  }
+
+  function validateInputStringToObj(inputString) {
+    var result = inputString.split(" ");
+    return result;
+  }
+
+  function isObjMatch(objInput) {
+    return objInput[0].length == objInput[1].length;
+  }
+
+  function maskingString(stringInput, maskString) {
+    var result = "";
+    for (var i = 0; i < stringInput.length; i++) {
+      result +=  stringUpper( stringInput[i], maskString[i]);
+    }
+    return result;
+  }
+
+  function stringUpper(charInput, mask) {
+    var result = charInput;
+    if (isUpper(mask)) {
+      result = charInput.toUpperCase();
+    }
+    return result;
+  }
+
+  function isUpper(mask) {
+    return mask == 1;
+  }
+
+
+
+  ////////////// TEST ZONE ////////////////
+
+  function mainTest(){
+    Test_validateInputStringToObj_WhenInputIshello11001_MustReturnTwoArray();
+    Test_isObjMatch_WhenInputIshello11001_MustReturnTwoArray();
+    Test_maskingString_WhenInputIshelloAnd11001_MustReturnHEllO();
+    Test_mainSolvePloblem_WhenInputIshelloAnd11001_MustReturnHEllO();
+    Test_mainSolvePloblem();
+  }
+
+  function Test_validateInputStringToObj_WhenInputIshello11001_MustReturnTwoArray() {
+    var funcName = "Test_validateInputStringToObj_WhenInputIshello11001_MustReturnTwoArray";
+    var result = validateInputStringToObj("hello 11001");
+    var expectResult = 2;
+    Assert(funcName, expectResult, result.length);
+  }
+
+  function Test_isObjMatch_WhenInputIshello11001_MustReturnTwoArray() {
+    var funcName = "Test_isObjMatch_WhenInputIshello11001_MustReturnTwoArray";
+    var result = isObjMatch(["hello", "11001"]);
+    var expectResult = true;
+    Assert(funcName, expectResult, result);
+  }
+
+  function Test_maskingString_WhenInputIshelloAnd11001_MustReturnHEllO() {
+    var funcName = "Test_maskingString_WhenInputIshelloAnd11001_MustReturnHEllO";
+    var result = maskingString("hello", "11001");
+    var expectResult = "HEllO"
+    Assert(funcName, expectResult, result);
+  }
+
+  function Test_mainSolvePloblem_WhenInputIshelloAnd11001_MustReturnHEllO() {
+    var funcName = "Test_mainSolvePloblem_WhenInputIshelloAnd11001_MustReturnHEllO";
+    var result = mainSolvePloblem("hello 11001");
+    var expectResult = "HEllO"
+    Assert(funcName, expectResult, result);
+  }
+
+  function Test_mainSolvePloblem() {
+    var funcName = "Test_mainSolvePloblem";
+    var result = mainSolvePloblem("world 10000");
+    var expectResult = "World"
+    Assert(funcName, expectResult, result);
+  }
+
+
+  //////////////////////////////////////////
+
+
+  ////////////// GLOBAL TEST ZONE ////////////////
+
+
+  function Assert(funcName ,expectResult, result) {
+    if (result != expectResult) {
+      var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+      alert("Error -- > " + errorMsg);
+      console.log("Error -> " + errorMsg);
+    }
+    else {
+      console.log("Success -> " + funcName);
+    }
+  }
+
+</script>

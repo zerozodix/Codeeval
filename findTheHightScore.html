@@ -1,0 +1,61 @@
+<script>
+  function validateInput(input) {
+    var rawContestant = input.split("|");
+    var contestant = [];
+    for (var i = 0; i < rawContestant.length; i++) {
+      contestant.push(mapingScoreToContestant(rawContestant[i]));
+    }
+    var maxScoreCat = findMaxScore(contestant);
+    var result = showResult(maxScoreCat);
+    return console.log(result);
+  }
+
+  function showResult(maxScoreCat){
+    var result = "";
+    for (var i = 0; i < maxScoreCat.length; i++) {
+      result += maxScoreCat[i] + " ";
+    }
+    return result.trim();
+  }
+
+  function mapingScoreToContestant(rawScore) {
+    var result = [];
+    var rawData = rawScore.split(" ");
+    for (var i = 0; i < rawData.length; i++) {
+      if (checkStringNotNull(rawData[i])) {
+        result.push(rawData[i]);
+      }
+    }
+    return result;
+  }
+
+  function checkStringNotNull(string) {
+    return string != "";
+  }
+
+  function findMaxScore(contestant) {
+    var scoreCat = contestant[0].length;
+    var resultMaxScore = [];
+    for (var category = 0; category < scoreCat; category++) {
+      resultMaxScore.push(findCategoryMaxScore(contestant, category));
+    }
+    return resultMaxScore;
+  }
+
+  function findCategoryMaxScore(contestant, category) {
+    var maxScore = parseInt(contestant[0][category]);
+    for (var i = 0; i < contestant.length; i++) {
+      maxScore = getMax(maxScore, parseInt(contestant[i][category]));
+    }
+    return maxScore;
+  }
+
+  function getMax(scoreBase, score) {
+    if(scoreBase < score){
+      return score;
+    } else {
+      return scoreBase;
+    }
+  }
+
+</script>

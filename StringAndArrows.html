@@ -1,0 +1,30 @@
+<script>
+function countTheArrow(sourceString){
+  var leftArrow = mapArrow(sourceString, "<--<<");
+  var rightArrow = mapArrow(sourceString, ">>-->");
+  return leftArrow + rightArrow
+}
+
+
+function mapArrow(sourceString, arrow) {
+  var result = 0;
+  var findLenght = (sourceString.length - (arrow.length - 1));
+  for (var i = 0; i < findLenght; i++) {
+    var mapping = true;
+    var arrowIndex = 0;
+    while (mapping) {
+      if (arrowIndex < arrow.length) {
+        if (sourceString[i + arrowIndex] != arrow[arrowIndex]) {
+          mapping = false;
+        }
+      }
+      else {
+        result++;
+        mapping = false;
+      }
+      arrowIndex++;
+    }
+  }
+  return result;
+}
+</script>

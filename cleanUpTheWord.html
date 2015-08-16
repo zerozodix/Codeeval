@@ -1,0 +1,32 @@
+<script>
+function cleanUpOnlyWord(inputString) {
+  var result = validateString(inputString);
+  return console.log(result.trim());
+}
+
+function validateString(rawString) {
+  var result = "";
+  for (var i = 0; i < rawString.length; i++) {
+    var charactor = rawString[i].toLowerCase();
+    if ( isAtoZ(charactor) ) {
+      result = result + charactor;
+    }
+    else {
+      if (!isLastCharIsSpace(result[(result.length-1)])) {
+        result = result + ' ';
+      }
+    }
+  }
+  return result;
+}
+
+function isAtoZ(charactor){
+  var baseText = "abcdefghijklmnopqrstuvwxyz";
+  return baseText.indexOf(charactor) >= 0;
+}
+
+function isLastCharIsSpace(lastCharactor) {
+  return lastCharactor == ' '
+}
+
+</script>

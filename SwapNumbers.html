@@ -1,0 +1,110 @@
+<script>
+function mainSolvePloblem(stringInput) {
+  var inputObj = validateInputStringToObj(stringInput);
+  var result = swapWordFirstLastAllInObjList(inputObj)
+  return result;
+}
+
+function validateInputStringToObj(inputString) {
+  var result = inputString.split(" ");
+  return result;
+}
+
+function swapWordFirstLastAllInObjList(objLst) {
+  var result = "";
+  for (var index = 0; index < objLst.length; index++) {
+    if (isFirstLastStringAreInt(objLst[index])) {
+      result += swapWordFirstLast(objLst[index]) + " ";
+    }
+  }
+  return result.trim();
+}
+
+function swapWordFirstLast(inputString) {
+  var result = "";
+  var lastIndexOfInputString = (inputString.length-1);
+  for (var i = 0; i < inputString.length; i++) {
+    if (isFirstOrLastChar(i, lastIndexOfInputString)) {
+      result += inputString[lastIndexOfInputString-i];
+    } else {
+      result += inputString[i];
+    }
+  }
+  return result;
+}
+
+function isFirstLastStringAreInt(inputString) {
+  var lastIndexOfInputString = inputString.length - 1;
+  return isInt(inputString[0]) && isInt(inputString[lastIndexOfInputString]);
+}
+
+function isInt(value) {
+  return !isNaN(value)
+}
+
+function isFirstOrLastChar(index, lastIndexOfInputString) {
+    return index == 0 || index == lastIndexOfInputString;
+}
+
+////////////// TEST ZONE ////////////////
+
+function mainTest(){
+  Test_swapWordFirstLast_WhenInputIs4Always0_MustReturn0Always4();
+  Test_isFirstLastStringAreInt_WhenInputIs4Always0_MustReturnTrue();
+  Test_isFirstLastStringAreInt_WhenInputIs4AlwaysD_MustReturnFalse();
+  Test_mainSolvePloblem();
+  Test_mainSolvePloblem2();
+}
+
+function Test_swapWordFirstLast_WhenInputIs4Always0_MustReturn0Always4() {
+  var funcName = "Test_swapWordFirstLast_WhenInputIs4Always0_MustReturn0Always4";
+  var result = swapWordFirstLast("4Always0");
+  var expectResult = "0Always4";
+  Assert(funcName, expectResult, result);
+}
+
+function Test_isFirstLastStringAreInt_WhenInputIs4Always0_MustReturnTrue() {
+  var funcName = "Test_isFirstLastStringAreInt_WhenInputIs4Always0_MustReturnTrue";
+  var result = isFirstLastStringAreInt("4Always0");
+  var expectResult = true;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_isFirstLastStringAreInt_WhenInputIs4AlwaysD_MustReturnFalse() {
+  var funcName = "Test_isFirstLastStringAreInt_WhenInputIs4AlwaysD_MustReturnFalse";
+  var result = isFirstLastStringAreInt("4AlwaysD");
+  var expectResult = false;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_mainSolvePloblem() {
+  var funcName = "Test_mainSolvePloblem";
+  var result = mainSolvePloblem("4Always0 5look8 4on9 7the2 4bright8 9side7 3of8 5life5");
+  var expectResult = "0Always4 8look5 9on4 2the7 8bright4 7side9 8of3 5life5"
+  Assert(funcName, expectResult, result);
+}
+
+function Test_mainSolvePloblem2() {
+  var funcName = "Test_mainSolvePloblem2";
+  var result = mainSolvePloblem("5Nobody5 7expects3 5the4 6Spanish4 9inquisition0");
+  var expectResult = "5Nobody5 3expects7 4the5 4Spanish6 0inquisition9"
+  Assert(funcName, expectResult, result);
+}
+//////////////////////////////////////////
+
+
+////////////// GLOBAL TEST ZONE ////////////////
+
+
+function Assert(funcName ,expectResult, result) {
+  if (result != expectResult) {
+    var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+    alert("Error -- > " + errorMsg);
+    console.log("Error -> " + errorMsg);
+  }
+  else {
+    console.log("Success -> " + funcName);
+  }
+}
+
+</script>
