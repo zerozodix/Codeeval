@@ -1,0 +1,114 @@
+<script>
+function mainSolvePloblem(stringInput) {
+  var result = getDecodeNumber(0, stringInput)
+  return result;
+}
+
+function getDecodeNumber(startIndex, inputString) {
+  var result = 0;
+  var inputStringLength = inputString.length - 1;
+  if(startIndex < inputStringLength){
+    result = result + getDecodeNumber(startIndex + 1, inputString);
+    if(isDoubleWordInRangeTwentySix(inputString[startIndex] + inputString[startIndex + 1])){
+      result = result + getDecodeNumber(startIndex + 2, inputString);
+    }else {
+      return result;
+    }
+  } else {
+    return result + 1;
+  }
+  return result;
+}
+
+function isDoubleWordInRangeTwentySix(inputString) {
+  return parseInt(inputString) < 27;
+}
+
+////////////// TEST ZONE ////////////////
+
+
+function mainTest(){
+  Test_isDoubleWordInRangeTwentySix_WhenInputIs12_MustReturnTrue();
+  Test_isDoubleWordInRangeTwentySix_WhenInputIs27_MustReturnFalse();
+  // Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs12_MustReturn1();
+  // Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs123_MustReturn3();
+  // Test_mainSolvePloblem1();
+  Test_mainSolvePloblem2();
+}
+
+function Test_isDoubleWordInRangeTwentySix_WhenInputIs12_MustReturnTrue() {
+  var funcName = "Test_isDoubleWordInRangeTwentySix_WhenInputIs12_MustReturnTrue";
+  var result = isDoubleWordInRangeTwentySix("12");
+  var expectResult = true;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_isDoubleWordInRangeTwentySix_WhenInputIs27_MustReturnFalse() {
+  var funcName = "Test_isDoubleWordInRangeTwentySix_WhenInputIs27_MustReturnFalse";
+  var result = isDoubleWordInRangeTwentySix("27");
+  var expectResult = false;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs123_MustReturn3() {
+  var funcName = "Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs123_MustReturn3";
+  var result = getDecodeNumber(0, "123");
+  var expectResult = 3;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs12_MustReturn1() {
+  var funcName = "Test_getDecodeNumber_WhenInputIsStartIs0StringInputIs12_MustReturn1";
+  var result = getDecodeNumber(0, "12");
+  var expectResult = 2;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_mainSolvePloblem1() {
+  var funcName = "Test_mainSolvePloblem1";
+  var result = mainSolvePloblem("12");
+  var expectResult = 2;
+  Assert(funcName, expectResult, result);
+}
+
+function Test_mainSolvePloblem2() {
+  var funcName = "Test_mainSolvePloblem1";
+  var result = mainSolvePloblem("1234");
+  var expectResult = 3;
+  Assert(funcName, expectResult, result);
+}
+
+//////////////////////////////////////////
+//
+// 1234
+//
+// 1 2 3 4  +1
+// 1 2 34   +0
+// 1 23 4   +1
+
+//
+// 12 3 4
+
+
+// 12 34
+
+
+
+
+
+
+////////////// GLOBAL TEST ZONE ////////////////
+
+
+function Assert(funcName ,expectResult, result) {
+  if (result != expectResult) {
+    var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+    alert("Error -- > " + errorMsg);
+    console.log("Error -> " + errorMsg);
+  }
+  else {
+    console.log("Success -> " + funcName);
+  }
+}
+
+</script>
