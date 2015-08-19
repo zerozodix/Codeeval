@@ -1,0 +1,159 @@
+<script>
+function mainSolvePloblem(stringInput) {
+  var inputCoordinator = getCoodinator(stringInput);
+  var result =  getDirectionOfTwoCoordinator(inputCoordinator[0], inputCoordinator[1]);
+  return result;
+}
+
+function getCoodinator(inputString) {
+  var arr = inputString.split(" ");
+  var coordinators = [
+    { x: parseInt(arr[0]), y: parseInt(arr[1])},
+    { x: parseInt(arr[2]), y: parseInt(arr[3])}
+  ]
+  return coordinators;
+}
+
+function getDirectionOfTwoCoordinator(xyObj, pqObj) {
+  var result = "";
+  var xCoordinator = getCoodinatorX(xyObj.x, pqObj.x);
+  var yCoordinator = getCoodinatorY(xyObj.y, pqObj.y);
+  result = yCoordinator + xCoordinator;
+  return result == "" ? "here" : result;
+}
+
+function getCoodinatorX(xObj, pObj) {
+  if(xObj < pObj){
+    return "E";
+  }
+  else if (xObj > pObj) {
+      return "W";
+  }
+  return "";
+}
+
+function getCoodinatorY(yObj, qObj) {
+  if(yObj < qObj){
+    return "N";
+  }
+  else if (yObj > qObj) {
+      return "S";
+  }
+  return "";
+}
+
+
+
+////////////// TEST ZONE ////////////////
+
+
+function mainTest(){
+  Test_getCoordinator_WhenInputIsString0_0_1_5_MustReturnCoordinatorObjx0y0o1p5();
+  Test_getDirectionOfTwoCoordinator_WhenInputIsX0Y0O1P5_MustReturnNE();
+  Test_getDirectionOfTwoCoordinator_WhenInputIsX12Y13O12P13_MustReturnNE();
+  Test_mainSolvePloblem1();
+}
+
+function Test_getCoordinator_WhenInputIsString0_0_1_5_MustReturnCoordinatorObjx0y0o1p5() {
+  var funcName = "Test_getCoordinator_WhenInputIsString0_0_1_5_MustReturnCoordinatorObjx0y0o1p5";
+  var result = getCoodinator("0 0 1 5")
+  Assert(funcName, 0, result[0].x);
+  Assert(funcName, 0, result[0].y);
+  Assert(funcName, 1, result[1].x);
+  Assert(funcName, 5, result[1].y);
+}
+
+function Test_getDirectionOfTwoCoordinator_WhenInputIsX0Y0O1P5_MustReturnNE() {
+  var funcName = "Test_getDirectionOfTwoCoordinator_WhenInputIsX0Y0O1P5_MustReturnNE";
+  var inputCoordinator = getCoodinator("0 0 1 5");
+  var result =  getDirectionOfTwoCoordinator(inputCoordinator[0], inputCoordinator[1]);
+  Assert(funcName, "NE", result);
+}
+
+function Test_getDirectionOfTwoCoordinator_WhenInputIsX12Y13O12P13_MustReturnNE() {
+  var funcName = "Test_getDirectionOfTwoCoordinator_WhenInputIsX12Y13O12P13_MustReturnNE";
+  var inputCoordinator = getCoodinator("12 13 12 13");
+  var result =  getDirectionOfTwoCoordinator(inputCoordinator[0], inputCoordinator[1]);
+  Assert(funcName, "here", result);
+}
+
+
+function Test_mainSolvePloblem1() {
+  var funcName = "Test_mainSolvePloblem1";
+  var inputCoordinator = getCoodinator("7256 -3564 7256 -2537");
+  var result =  getDirectionOfTwoCoordinator(inputCoordinator[0], inputCoordinator[1]);
+  Assert(funcName, "N", result);
+
+}
+
+
+//////////////////////////////////////////
+//
+// 1234
+//
+// 1 2 3 4  +1
+// 1 2 34   +0
+// 1 23 4   +1
+
+//
+// 12 3 4
+
+
+// 12 34
+
+
+
+
+
+
+////////////// GLOBAL TEST ZONE ////////////////
+
+
+function Assert(funcName ,expectResult, result) {
+  if (result != expectResult) {
+    var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+    alert("Error -- > " + errorMsg);
+    console.log("Error -> " + errorMsg);
+  }
+  else {
+    console.log("Success -> " + funcName);
+  }
+}
+
+
+function AssertArray(funcName ,expectResult, result) {
+  if (result.equals(expectResult)) {
+    var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+    alert("Error -- > " + errorMsg);
+    console.log("Error -> " + errorMsg);
+  }
+  else {
+    console.log("Success -> " + funcName);
+  }
+}
+
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
+
+</script>
