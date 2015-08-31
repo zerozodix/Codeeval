@@ -1,0 +1,75 @@
+<script>
+  function mainSolvePloblem(stringInput) {
+    var inputObj = validateInputStringToObj(stringInput);
+    var reverseObjArray = ReverseObjInArrayObj(inputObj);
+    var result = ConvertArrayObjToString(reverseObjArray);
+    return result;
+  }
+
+  function validateInputStringToObj(inputString) {
+    return inputString.split(" ");
+  }
+
+  function ReverseObjInArrayObj(objItem) {
+    var result = [];
+    for (var i = objItem.length - 1 ; i >= 0; i--) {
+      result.push(objItem[i]);
+    }
+    return result;
+  }
+
+  function ConvertArrayObjToString(arrayObj) {
+    return result = arrayObj.toString().replace(/,/g, " ");;
+  }
+
+
+
+  ////////////// TEST ZONE ////////////////
+
+  function mainTest(){
+    Test_ReverseObjInArrayObj_WhenInputIsStringHelloWorld_MustReturnObjWorldHello();
+    Test_ConvertArrayObjToString_WhenInputIsArrayWorldHello_MustReturnWorldspaceHello();
+    Test_mainSolvePloblem("3 Rp sHI1 9nUkKbot4Xu8");
+  }
+
+  function Test_ReverseObjInArrayObj_WhenInputIsStringHelloWorld_MustReturnObjWorldHello() {
+    var funcName = "Test_ReverseObjInArrayObj_WhenInputIsStringHelloWorld_MustReturnObjWorldHello";
+    var result = ReverseObjInArrayObj(["Hello","World"]);
+    var expectResult = ["World","Hello"];
+    Assert(funcName, expectResult.toString(), result.toString());
+  }
+
+  function Test_ConvertArrayObjToString_WhenInputIsArrayWorldHello_MustReturnWorldspaceHello(argument) {
+    var funcName = "Test_ConvertArrayObjToString_WhenInputIsArrayWorldHello_MustReturnWorldspaceHello";
+    var result = ConvertArrayObjToString(["World","Hello"]);
+    var expectResult = "World Hello";
+    Assert(funcName, expectResult.toString(), result.toString());
+  }
+
+  function Test_mainSolvePloblem(input) {
+    var funcName = "Test_mainSolvePloblem";
+    var result = mainSolvePloblem(input);
+    var expectResult = "World Hello";
+    Assert(funcName, expectResult.toString(), result.toString());
+  }
+
+  //////////////////////////////////////////
+
+
+  ////////////// GLOBAL TEST ZONE ////////////////
+
+
+  function Assert(funcName ,expectResult, result) {
+    if (result != expectResult) {
+      var errorMsg =  funcName + "\n your expect is " + expectResult + "\n your result is " + result
+      alert("Error -- > " + errorMsg);
+      console.log("Error -> " + errorMsg);
+    }
+    else {
+      console.log("Success -> " + funcName);
+    }
+  }
+
+
+
+</script>
